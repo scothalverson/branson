@@ -60,6 +60,7 @@ set( CXX_STANDARD_REQUIRED ON )
 set( CMAKE_CXX_EXTENSIONS OFF )
 set( CMAKE_C_EXTENSIONS   OFF )
 
+set( BUILD_TESTS 	  OFF )
 #------------------------------------------------------------------------------#
 # Build type and custom compiler flags
 

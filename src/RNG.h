@@ -58,6 +58,7 @@
 #define RNG_h
 
 #include <stdlib.h>
+#include "curand_stream.h"
 
 #ifdef __clang__
 #pragma clang diagnostic push
@@ -311,10 +312,15 @@ public:
    * This default constructor is invoked when a client wants to create a
    * RNG
    */
-  RNG() {}
+  RNG() {
+    this->sr = new StreamRandom(128*1024, 1234);
+  }
 
   //! Return a random double in the interval (0, 1).
-  double generate_random_number() const { return _ran(data); }
+  double generate_random_number() const { 
+	//return _ran(data);
+	return sr->get(); 
+  }
 
   //! Return the stream number.
   uint64_t get_num() const { return data[2]; }
@@ -324,7 +330,7 @@ public:
 
 private:
   mutable ctr_type::value_type data[4];
-
+  StreamRandom *sr;
   //! Private copy constructor.
   RNG(const RNG &);
 
